@@ -1,0 +1,5 @@
+FROM busybox
+WORKDIR /work
+COPY api /work/
+RUN cd /work && chmod +x api
+ENTRYPOINT ["./api"]

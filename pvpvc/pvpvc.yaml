@@ -1,0 +1,46 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: task-pv-claim
+spec:
+  storageClassName: manual
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: task-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 10Gi
+  accessModes:
+  - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: pvpvctest
+spec:
+  volumes:
+  - name: task-pv-storage
+    persistentVolumeClaim:
+      claimName: task-pv-claim
+  containers:
+  - name: pvpvcapp
+    image: registry.self/jw/pvpvcapp:v1
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - mountPath: "/data"
+      name: task-pv-storage

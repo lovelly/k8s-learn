@@ -1,0 +1,5 @@
+FROM radial/busyboxplus
+WORKDIR /work
+COPY pvpvc /work/
+RUN cd /work && chmod +x pvpvc
+ENTRYPOINT ["./pvpvc"]

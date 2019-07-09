@@ -1,0 +1,5 @@
+apiVersion: demo.localhost/v1alpha1
+kind: Bird
+metadata:
+  name: bird-example
+spec:

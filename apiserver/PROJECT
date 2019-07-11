@@ -1,0 +1,4 @@
+
+version: "1"
+domain: my.k8s.io
+repo: k8s-learn/apiserver

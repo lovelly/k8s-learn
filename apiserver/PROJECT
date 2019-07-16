@@ -1,4 +1,4 @@
 
 version: "1"
-domain: my.k8s.io
+domain: my.io
 repo: k8s-learn/apiserver

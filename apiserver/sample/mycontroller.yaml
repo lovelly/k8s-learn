@@ -1,0 +1,5 @@
+apiVersion: mycode.my.io/v1alpha1
+kind: MyController
+metadata:
+  name: mycontroller-example
+spec:

@@ -49,19 +49,24 @@ func ZapLoggerTo(destWriter io.Writer, development bool) logr.Logger {
 	var opts []zap.Option
 	if development {
 		encCfg := zap.NewDevelopmentEncoderConfig()
+		encCfg.EncodeCaller =  zapcore.FullCallerEncoder
+		encCfg.EncodeTime = zapcore.ISO8601TimeEncoder
 		enc = zapcore.NewConsoleEncoder(encCfg)
 		lvl = zap.NewAtomicLevelAt(zap.DebugLevel)
 		opts = append(opts, zap.Development(), zap.AddStacktrace(zap.ErrorLevel))
 	} else {
 		encCfg := zap.NewProductionEncoderConfig()
-		enc = zapcore.NewJSONEncoder(encCfg)
+		encCfg.EncodeCaller =  zapcore.FullCallerEncoder
+		encCfg.EncodeTime = zapcore.ISO8601TimeEncoder
+		//enc = zapcore.NewJSONEncoder(encCfg)
+		enc = zapcore.NewConsoleEncoder(encCfg)
 		lvl = zap.NewAtomicLevelAt(zap.InfoLevel)
 		opts = append(opts, zap.AddStacktrace(zap.WarnLevel),
 			zap.WrapCore(func(core zapcore.Core) zapcore.Core {
 				return zapcore.NewSampler(core, time.Second, 100, 100)
 			}))
 	}
-	opts = append(opts, zap.AddCallerSkip(1), zap.ErrorOutput(sink))
+	opts = append(opts, zap.AddCallerSkip(1),  zap.AddCaller(),zap.ErrorOutput(sink))
 	log := zap.New(zapcore.NewCore(&KubeAwareEncoder{Encoder: enc, Verbose: development}, sink, lvl))
 	log = log.WithOptions(opts...)
 	return zapr.NewLogger(log)

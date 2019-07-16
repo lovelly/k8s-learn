@@ -3,3 +3,6 @@
 /pvpvc/pvpvc
 /api/config
 /app/app
+/apiserver/bin
+/apiserver/default.etcd
+/apiserver/apiserver.local.config

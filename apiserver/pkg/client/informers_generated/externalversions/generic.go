@@ -19,7 +19,7 @@ package externalversions
 
 import (
 	"fmt"
-	v1 "k8s-learn/apiserver/pkg/apis/learn/v1"
+	v1alpha1 "k8s-learn/apiserver/pkg/apis/mycode/v1alpha1"
 
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	cache "k8s.io/client-go/tools/cache"
@@ -51,9 +51,9 @@ func (f *genericInformer) Lister() cache.GenericLister {
 // TODO extend this to unknown resources with a client pool
 func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource) (GenericInformer, error) {
 	switch resource {
-	// Group=learn.my.k8s.io, Version=v1
-	case v1.SchemeGroupVersion.WithResource("nginxes"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Learn().V1().Nginxes().Informer()}, nil
+	// Group=mycode.my.io, Version=v1alpha1
+	case v1alpha1.SchemeGroupVersion.WithResource("mycontrollers"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Mycode().V1alpha1().MyControllers().Informer()}, nil
 
 	}
 

@@ -31,11 +31,11 @@ import (
 
 func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenAPIDefinition {
 	return map[string]common.OpenAPIDefinition{
-		"k8s-learn/apiserver/pkg/apis/learn/v1.Nginx":                                  schema_pkg_apis_learn_v1_Nginx(ref),
-		"k8s-learn/apiserver/pkg/apis/learn/v1.NginxList":                              schema_pkg_apis_learn_v1_NginxList(ref),
-		"k8s-learn/apiserver/pkg/apis/learn/v1.NginxSchemeFns":                         schema_pkg_apis_learn_v1_NginxSchemeFns(ref),
-		"k8s-learn/apiserver/pkg/apis/learn/v1.NginxSpec":                              schema_pkg_apis_learn_v1_NginxSpec(ref),
-		"k8s-learn/apiserver/pkg/apis/learn/v1.NginxStatus":                            schema_pkg_apis_learn_v1_NginxStatus(ref),
+		"k8s-learn/apiserver/pkg/apis/mycode/v1alpha1.MyController":                    schema_pkg_apis_mycode_v1alpha1_MyController(ref),
+		"k8s-learn/apiserver/pkg/apis/mycode/v1alpha1.MyControllerList":                schema_pkg_apis_mycode_v1alpha1_MyControllerList(ref),
+		"k8s-learn/apiserver/pkg/apis/mycode/v1alpha1.MyControllerSchemeFns":           schema_pkg_apis_mycode_v1alpha1_MyControllerSchemeFns(ref),
+		"k8s-learn/apiserver/pkg/apis/mycode/v1alpha1.MyControllerSpec":                schema_pkg_apis_mycode_v1alpha1_MyControllerSpec(ref),
+		"k8s-learn/apiserver/pkg/apis/mycode/v1alpha1.MyControllerStatus":              schema_pkg_apis_mycode_v1alpha1_MyControllerStatus(ref),
 		"k8s.io/api/admissionregistration/v1alpha1.Initializer":                        schema_k8sio_api_admissionregistration_v1alpha1_Initializer(ref),
 		"k8s.io/api/admissionregistration/v1alpha1.InitializerConfiguration":           schema_k8sio_api_admissionregistration_v1alpha1_InitializerConfiguration(ref),
 		"k8s.io/api/admissionregistration/v1alpha1.InitializerConfigurationList":       schema_k8sio_api_admissionregistration_v1alpha1_InitializerConfigurationList(ref),
@@ -640,11 +640,11 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 	}
 }
 
-func schema_pkg_apis_learn_v1_Nginx(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_mycode_v1alpha1_MyController(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "Nginx",
+				Description: "MyController",
 				Properties: map[string]spec.Schema{
 					"kind": {
 						SchemaProps: spec.SchemaProps{
@@ -667,23 +667,23 @@ func schema_pkg_apis_learn_v1_Nginx(ref common.ReferenceCallback) common.OpenAPI
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s-learn/apiserver/pkg/apis/learn/v1.NginxSpec"),
+							Ref: ref("k8s-learn/apiserver/pkg/apis/mycode/v1alpha1.MyControllerSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("k8s-learn/apiserver/pkg/apis/learn/v1.NginxStatus"),
+							Ref: ref("k8s-learn/apiserver/pkg/apis/mycode/v1alpha1.MyControllerStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"k8s-learn/apiserver/pkg/apis/learn/v1.NginxSpec", "k8s-learn/apiserver/pkg/apis/learn/v1.NginxStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"k8s-learn/apiserver/pkg/apis/mycode/v1alpha1.MyControllerSpec", "k8s-learn/apiserver/pkg/apis/mycode/v1alpha1.MyControllerStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
-func schema_pkg_apis_learn_v1_NginxList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_mycode_v1alpha1_MyControllerList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -713,7 +713,7 @@ func schema_pkg_apis_learn_v1_NginxList(ref common.ReferenceCallback) common.Ope
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("k8s-learn/apiserver/pkg/apis/learn/v1.Nginx"),
+										Ref: ref("k8s-learn/apiserver/pkg/apis/mycode/v1alpha1.MyController"),
 									},
 								},
 							},
@@ -724,15 +724,15 @@ func schema_pkg_apis_learn_v1_NginxList(ref common.ReferenceCallback) common.Ope
 			},
 		},
 		Dependencies: []string{
-			"k8s-learn/apiserver/pkg/apis/learn/v1.Nginx", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"k8s-learn/apiserver/pkg/apis/mycode/v1alpha1.MyController", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
-func schema_pkg_apis_learn_v1_NginxSchemeFns(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_mycode_v1alpha1_MyControllerSchemeFns(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "Nginx Functions and Structs",
+				Description: "MyController Functions and Structs",
 				Properties: map[string]spec.Schema{
 					"DefaultSchemeFns": {
 						SchemaProps: spec.SchemaProps{
@@ -748,11 +748,11 @@ func schema_pkg_apis_learn_v1_NginxSchemeFns(ref common.ReferenceCallback) commo
 	}
 }
 
-func schema_pkg_apis_learn_v1_NginxSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_mycode_v1alpha1_MyControllerSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "NginxSpec defines the desired state of Nginx",
+				Description: "MyControllerSpec defines the desired state of MyController",
 				Properties:  map[string]spec.Schema{},
 			},
 		},
@@ -760,11 +760,11 @@ func schema_pkg_apis_learn_v1_NginxSpec(ref common.ReferenceCallback) common.Ope
 	}
 }
 
-func schema_pkg_apis_learn_v1_NginxStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_mycode_v1alpha1_MyControllerStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "NginxStatus defines the observed state of Nginx",
+				Description: "MyControllerStatus defines the observed state of MyController",
 				Properties:  map[string]spec.Schema{},
 			},
 		},

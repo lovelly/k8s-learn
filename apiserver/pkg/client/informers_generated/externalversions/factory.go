@@ -20,7 +20,7 @@ package externalversions
 import (
 	clientset "k8s-learn/apiserver/pkg/client/clientset_generated/clientset"
 	internalinterfaces "k8s-learn/apiserver/pkg/client/informers_generated/externalversions/internalinterfaces"
-	learn "k8s-learn/apiserver/pkg/client/informers_generated/externalversions/learn"
+	mycode "k8s-learn/apiserver/pkg/client/informers_generated/externalversions/mycode"
 	reflect "reflect"
 	sync "sync"
 	time "time"
@@ -171,9 +171,9 @@ type SharedInformerFactory interface {
 	ForResource(resource schema.GroupVersionResource) (GenericInformer, error)
 	WaitForCacheSync(stopCh <-chan struct{}) map[reflect.Type]bool
 
-	Learn() learn.Interface
+	Mycode() mycode.Interface
 }
 
-func (f *sharedInformerFactory) Learn() learn.Interface {
-	return learn.New(f, f.namespace, f.tweakListOptions)
+func (f *sharedInformerFactory) Mycode() mycode.Interface {
+	return mycode.New(f, f.namespace, f.tweakListOptions)
 }

@@ -19,8 +19,8 @@ limitations under the License.
 package apis
 
 import (
-	"k8s-learn/apiserver/pkg/apis/learn"
-	learnv1 "k8s-learn/apiserver/pkg/apis/learn/v1"
+	"k8s-learn/apiserver/pkg/apis/mycode"
+	mycodev1alpha1 "k8s-learn/apiserver/pkg/apis/mycode/v1alpha1"
 
 	"github.com/kubernetes-incubator/apiserver-builder-alpha/pkg/builders"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -28,7 +28,7 @@ import (
 
 var (
 	localSchemeBuilder = runtime.SchemeBuilder{
-		learnv1.AddToScheme,
+		mycodev1alpha1.AddToScheme,
 	}
 	AddToScheme = localSchemeBuilder.AddToScheme
 )
@@ -37,19 +37,19 @@ var (
 // so they can be registered with the apiserver
 func GetAllApiBuilders() []*builders.APIGroupBuilder {
 	return []*builders.APIGroupBuilder{
-		GetLearnAPIBuilder(),
+		GetMycodeAPIBuilder(),
 	}
 }
 
-var learnApiGroup = builders.NewApiGroupBuilder(
-	"learn.my.k8s.io",
-	"k8s-learn/apiserver/pkg/apis/learn").
-	WithUnVersionedApi(learn.ApiVersion).
+var mycodeApiGroup = builders.NewApiGroupBuilder(
+	"mycode.my.io",
+	"k8s-learn/apiserver/pkg/apis/mycode").
+	WithUnVersionedApi(mycode.ApiVersion).
 	WithVersionedApis(
-		learnv1.ApiVersion,
+		mycodev1alpha1.ApiVersion,
 	).
 	WithRootScopedKinds()
 
-func GetLearnAPIBuilder() *builders.APIGroupBuilder {
-	return learnApiGroup
+func GetMycodeAPIBuilder() *builders.APIGroupBuilder {
+	return mycodeApiGroup
 }

@@ -1,5 +1,0 @@
-apiVersion: learn.my.k8s.io/v1
-kind: Nginx
-metadata:
-  name: nginx-example
-spec:

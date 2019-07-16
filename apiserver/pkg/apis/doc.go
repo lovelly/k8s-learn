@@ -17,7 +17,7 @@ limitations under the License.
 
 
 //
-// +domain=my.k8s.io
+// +domain=my.io
 
 package apis
 

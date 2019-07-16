@@ -1,4 +1,3 @@
-
 /*
 Copyright 2017 The Kubernetes Authors.
 
@@ -18,18 +17,17 @@ limitations under the License.
 package main
 
 import (
-	// Make sure dep tools picks up these dependencies
-	_ "k8s.io/apimachinery/pkg/apis/meta/v1"
 	_ "github.com/go-openapi/loads"
-
-	"github.com/kubernetes-incubator/apiserver-builder-alpha/pkg/cmd/server"
-	_ "k8s.io/client-go/plugin/pkg/client/auth" // Enable cloud provider auth
+	_ "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	"k8s-learn/apiserver/pkg/apis"
 	"k8s-learn/apiserver/pkg/openapi"
+
+	"github.com/kubernetes-incubator/apiserver-builder-alpha/pkg/cmd/server"
+	_ "k8s.io/client-go/plugin/pkg/client/auth" // Enable cloud provider auth
 )
 
 func main() {
 	version := "v0"
-	server.StartApiServer("/registry/my.k8s.io", apis.GetAllApiBuilders(), openapi.GetOpenAPIDefinitions, "Api", version)
+	server.StartApiServer("/registry/my.io", apis.GetAllApiBuilders(), openapi.GetOpenAPIDefinitions, "Api", version)
 }

@@ -19,8 +19,8 @@ package fake
 
 import (
 	clientset "k8s-learn/apiserver/pkg/client/clientset_generated/clientset"
-	learnv1 "k8s-learn/apiserver/pkg/client/clientset_generated/clientset/typed/learn/v1"
-	fakelearnv1 "k8s-learn/apiserver/pkg/client/clientset_generated/clientset/typed/learn/v1/fake"
+	mycodev1alpha1 "k8s-learn/apiserver/pkg/client/clientset_generated/clientset/typed/mycode/v1alpha1"
+	fakemycodev1alpha1 "k8s-learn/apiserver/pkg/client/clientset_generated/clientset/typed/mycode/v1alpha1/fake"
 
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
@@ -71,12 +71,12 @@ func (c *Clientset) Discovery() discovery.DiscoveryInterface {
 
 var _ clientset.Interface = &Clientset{}
 
-// LearnV1 retrieves the LearnV1Client
-func (c *Clientset) LearnV1() learnv1.LearnV1Interface {
-	return &fakelearnv1.FakeLearnV1{Fake: &c.Fake}
+// MycodeV1alpha1 retrieves the MycodeV1alpha1Client
+func (c *Clientset) MycodeV1alpha1() mycodev1alpha1.MycodeV1alpha1Interface {
+	return &fakemycodev1alpha1.FakeMycodeV1alpha1{Fake: &c.Fake}
 }
 
-// Learn retrieves the LearnV1Client
-func (c *Clientset) Learn() learnv1.LearnV1Interface {
-	return &fakelearnv1.FakeLearnV1{Fake: &c.Fake}
+// Mycode retrieves the MycodeV1alpha1Client
+func (c *Clientset) Mycode() mycodev1alpha1.MycodeV1alpha1Interface {
+	return &fakemycodev1alpha1.FakeMycodeV1alpha1{Fake: &c.Fake}
 }

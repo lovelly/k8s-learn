@@ -540,7 +540,7 @@ func (l *loggingT) header(s severity, depth int) (*buffer, string, int) {
 	} else {
 		slash := strings.LastIndex(file, "/")
 		if slash >= 0 {
-			file = file[slash+1:]
+			//file = file[slash+1:]
 		}
 	}
 	return l.formatHeader(s, file, line), file, line
@@ -580,7 +580,7 @@ func (l *loggingT) formatHeader(s severity, file string, line int) *buffer {
 	buf.WriteString(file)
 	buf.tmp[0] = ':'
 	n := buf.someDigits(1, line)
-	buf.tmp[n+1] = ']'
+	buf.tmp[n+1] = ' '
 	buf.tmp[n+2] = ' '
 	buf.Write(buf.tmp[:n+3])
 	return buf

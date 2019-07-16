@@ -1,4 +1,4 @@
-API rule violation: names_match,k8s-learn/apiserver/pkg/apis/learn/v1,NginxSchemeFns,DefaultSchemeFns
+API rule violation: names_match,k8s-learn/apiserver/pkg/apis/mycode/v1alpha1,MyControllerSchemeFns,DefaultSchemeFns
 API rule violation: names_match,k8s.io/api/authorization/v1beta1,SubjectAccessReviewSpec,Groups
 API rule violation: names_match,k8s.io/api/core/v1,AzureDiskVolumeSource,DataDiskURI
 API rule violation: names_match,k8s.io/api/core/v1,ContainerStatus,LastTerminationState

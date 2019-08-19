@@ -1,0 +1,45 @@
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: validation-webhook-example-cfg
+  labels:
+    app: admission-webhook-example
+webhooks:
+  - name: required-labels.qikqiak.com
+    clientConfig:
+      service:
+        name: admission-webhook-example-svc
+        namespace: default
+        path: "/validate"
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUN5RENDQWJDZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRFNU1EZ3hPVEEwTXpNeU1Gb1hEVEk1TURneE5qQTBNek15TUZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTDhrCk85TFVZT3NZVzhTd0QvUGp0QTJzcXZzWE5HS2dlTFN3RXBMTE1oWVNjc3BTSnRIenV6ak9BNVR5RUZqV0RPSVYKU0NONVlRdDdtTHh0Y28wSm1jaCtrOXNVSENFblQzNUdSdmU2ZHFrUFdFVHVBMThTdG5WY1o4eE9Hekx2ZFFRWApoNjRJeFgyblIyNlpKbjBnQ1ZKcDRKM0JnUGY2Uk01elhCcjE3aHVFTStoWXlPVXUzaDBoS00wb0FWTXJWY0YwCmNWVGF2VXMzczQwa0JqQWdXbVVYQ2FWTUROK1RxRXNzZE5wcm0wb0xXdFl5ZExUS0crSVF0SVN1TDA5eUszY00KWGNUbHBxbms0ajkydXRmb1ZrZFZPdkVnWTdpVTQ4RzQvbnNURC9FS0wwc0V5Zk14Mnhzb2F1cmxPdmJLTG5FOQphcGFXYnMvZkNVcjZhWUpxUUwwQ0F3RUFBYU1qTUNFd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0RRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFERTFrc3ZsYm9BYmozWm55ajNXSm9kS09qblQKejhsM1NLY3MyS1RmWjJ0N1RZMUhFYkZzUW4xQUFWcXo5aWQrRGJXUUs3N29SVEFXbEF0SzRON0VUMGZuOE1ucgp4SE9Fc3RUY1M3Z1o0YkFJOWRZWWoxMzlnK0l3RDhjcWwzQ3poWlJ2TzFYVWxvYVFXOURhQWwzOXFTNlhKOVlBCldRVDkyZUtuZU9xZzc5NnRHLzdLVzhsQUlKVURKdWlWUmtodHE3RTdrK2JaUnlrOGVZMGtkS2NmVy90K1N0MkIKRmpacGQ1dUVoc3pxZG4yU1dTREdGSWhXRi94NkNBdlpqQWh6QU9UN3NkNVJxTW5XOEY2ZDBDS1JhQy80dEg2dwpnMWd5Q1hBVnUwUlFmbGszVHNRUXZXaktseUNrUUozcEhFUEd1QU1XT2svYVhEeXVvM0tsUHVWNDZrWT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+    rules:
+      - operations: [ "CREATE" ]
+        apiGroups: ["apps", ""]
+        apiVersions: ["v1"]
+        resources: ["deployments","services"]
+    namespaceSelector:
+      matchLabels:
+        admission-webhook-example: enabled
+---
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: mutating-webhook-example-cfg
+  labels:
+    app: admission-webhook-example
+webhooks:
+  - name: mutating-example.qikqiak.com
+    clientConfig:
+      service:
+        name: admission-webhook-example-svc
+        namespace: default
+        path: "/mutate"
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUN5RENDQWJDZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRFNU1EZ3hPVEEwTXpNeU1Gb1hEVEk1TURneE5qQTBNek15TUZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTDhrCk85TFVZT3NZVzhTd0QvUGp0QTJzcXZzWE5HS2dlTFN3RXBMTE1oWVNjc3BTSnRIenV6ak9BNVR5RUZqV0RPSVYKU0NONVlRdDdtTHh0Y28wSm1jaCtrOXNVSENFblQzNUdSdmU2ZHFrUFdFVHVBMThTdG5WY1o4eE9Hekx2ZFFRWApoNjRJeFgyblIyNlpKbjBnQ1ZKcDRKM0JnUGY2Uk01elhCcjE3aHVFTStoWXlPVXUzaDBoS00wb0FWTXJWY0YwCmNWVGF2VXMzczQwa0JqQWdXbVVYQ2FWTUROK1RxRXNzZE5wcm0wb0xXdFl5ZExUS0crSVF0SVN1TDA5eUszY00KWGNUbHBxbms0ajkydXRmb1ZrZFZPdkVnWTdpVTQ4RzQvbnNURC9FS0wwc0V5Zk14Mnhzb2F1cmxPdmJLTG5FOQphcGFXYnMvZkNVcjZhWUpxUUwwQ0F3RUFBYU1qTUNFd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0RRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFERTFrc3ZsYm9BYmozWm55ajNXSm9kS09qblQKejhsM1NLY3MyS1RmWjJ0N1RZMUhFYkZzUW4xQUFWcXo5aWQrRGJXUUs3N29SVEFXbEF0SzRON0VUMGZuOE1ucgp4SE9Fc3RUY1M3Z1o0YkFJOWRZWWoxMzlnK0l3RDhjcWwzQ3poWlJ2TzFYVWxvYVFXOURhQWwzOXFTNlhKOVlBCldRVDkyZUtuZU9xZzc5NnRHLzdLVzhsQUlKVURKdWlWUmtodHE3RTdrK2JaUnlrOGVZMGtkS2NmVy90K1N0MkIKRmpacGQ1dUVoc3pxZG4yU1dTREdGSWhXRi94NkNBdlpqQWh6QU9UN3NkNVJxTW5XOEY2ZDBDS1JhQy80dEg2dwpnMWd5Q1hBVnUwUlFmbGszVHNRUXZXaktseUNrUUozcEhFUEd1QU1XT2svYVhEeXVvM0tsUHVWNDZrWT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+    rules:
+      - operations: [ "CREATE" ]
+        apiGroups: ["apps", ""]
+        apiVersions: ["v1"]
+        resources: ["deployments","services"]
+    namespaceSelector:
+      matchLabels:
+        admission-webhook-example: enabled
